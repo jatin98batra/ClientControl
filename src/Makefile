@@ -1,13 +1,21 @@
-APP=clientControl
-OBJS=main.o
+BACKEND=clientControl
+COMMANDER=commander
+
+BACKEND_OBJS=main.o
+COMMANDER_OBJS=commander.o
+OBJS=$(BACKEND_OBJS) $(COMMANDER_OBJS)
 OUTPUT_DIR=../output
 
 
-$(APP):$(OBJS)
-	gcc -o $(APP) $(OBJS)
+$(COMMANDER):$(COMMANDER_OBJS)
+	gcc -o $(COMMANDER) $(COMMANDER_OBJS)
+
+$(BACKEND):$(BACKEND_OBJS)
+	gcc -o $(BACKEND) $(BACKEND_OBJS)
 
 install:
-	mv $(APP) $(OUTPUT_DIR)
+	mv $(BACKEND) $(OUTPUT_DIR)
+	mv $(COMMANDER) $(OUTPUT_DIR)
 
 
 
@@ -23,9 +31,9 @@ install:
 clean: 
 	rm -rf $(OBJS)
 
+all: $(COMMANDER) $(BACKEND) install clean 
 
 
 
 
 
-all: $(APP) install clean 
